@@ -1855,6 +1855,7 @@ function Datepicker() {
 		altFormat: "", // The date format to use for the alternate field
 		constrainInput: true, // The input is constrained by the current date format
 		showButtonPanel: false, // True to show button panel, false to not show it
+		showButtonPanelInline: false, // True to show button panel, false to not show it
 		autoSize: false, // True to size the input for the date format, false to leave as is
 		disabled: false // The initial disabled state
 	};
@@ -3374,6 +3375,7 @@ $.extend( Datepicker.prototype, {
 				new Date( tempDate.getFullYear(), tempDate.getMonth(), tempDate.getDate() ) ), // clear time
 			isRTL = this._get( inst, "isRTL" ),
 			showButtonPanel = this._get( inst, "showButtonPanel" ),
+            showButtonPanelInline = this._get( inst, "showButtonPanelInline" ),
 			hideIfNoPrevNext = this._get( inst, "hideIfNoPrevNext" ),
 			navigationAsDateFormat = this._get( inst, "navigationAsDateFormat" ),
 			numMonths = this._getNumberOfMonths( inst ),
@@ -3431,7 +3433,7 @@ $.extend( Datepicker.prototype, {
 		currentText = ( !navigationAsDateFormat ? currentText :
 			this.formatDate( currentText, gotoDate, this._getFormatConfig( inst ) ) );
 
-		controls = ( !inst.inline ? "<button type='button' class='ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all' data-handler='hide' data-event='click'>" +
+		controls = ( !inst.inline || showButtonPanelInline == true ? "<button type='button' class='ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all' data-handler='hide' data-event='click'>" +
 			this._get( inst, "closeText" ) + "</button>" : "" );
 
 		buttonPanel = ( showButtonPanel ) ? "<div class='ui-datepicker-buttonpane ui-widget-content'>" + ( isRTL ? controls : "" ) +
